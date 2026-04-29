@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grad Pathways — The Future of Medicine 🩺</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Brand High-End Palette */
+            --brand-teal: #1d9e75;
+            --brand-orange: #f58220;
+            --brand-yellow: #ffc20e;
+            --neon-yellow-glow: #fff200; 
+            
+            --bg-deep: #0f1c1a; 
+            --card-glass: rgba(25, 46, 42, 0.8);
+            --text-main: #ffffff;
+            --text-dim: #a1b5b0;
+            --border-glass: rgba(255, 255, 255, 0.15);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Background Mesh */
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(245, 130, 32, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(29, 158, 117, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 194, 14, 0.05) 0%, transparent 50%);
+            filter: blur(60px);
+        }
+
+        /* Floating Emoji System */
+        .emoji-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: float-drift 25s linear infinite;
+        }
+
+        @keyframes float-drift {
+            0% { transform: translateY(110vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-20vh) rotate(360deg) translateX(50px); opacity: 0; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            animation: appEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes appEntry {
+            from { opacity: 0; transform: scale(0.98) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        header { text-align: center; margin-bottom: 2rem; }
+
+        /* NEON CIRCULAR LOGO ICON (CLICKABLE) */
+        .logo-link {
+            display: block;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.5rem;
+            text-decoration: none;
+        }
+
+        .logo-box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: floatLogo 5s ease-in-out infinite;
+            background: white; 
+            border-radius: 50%; /* Pure Circle */
+            padding: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--brand-teal);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .logo-link:hover .logo-box {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px var(--brand-yellow);
+        }
+
+        /* Glossy overlay for the circular logo box */
+        .logo-box::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .logo-img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .brand-pill {
+            display: inline-block;
+            background: rgba(29, 158, 117, 0.15);
+            padding: 5px 20px;
+            border-radius: 100px;
+            color: var(--brand-teal);
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid rgba(29, 158, 117, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        /* REUSABLE GLASS CARD STYLE FOR BENTO */
+        .glass-card {
+            position: relative;
+            background: var(--card-glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--border-glass);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
+        }
+
+        /* Shimmer Shine effect applied to ALL glass cards */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: -150%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(35deg);
+            pointer-events: none;
+            animation: shimmer 10s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(-30%, -30%) rotate(35deg); }
+            100% { transform: translate(40%, 40%) rotate(35deg); }
+        }
+
+        .main-card {
+            border-radius: 40px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(28px, 5vw, 38px);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1.25rem;
+            letter-spacing: -2.5px;
+            background: linear-gradient(to bottom, #fff, #a1b5b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* HUD TIMER WITH YELLOW GLOWING NUMBERS */
+        .hud-timer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+            background: rgba(0,0,0,0.3);
+            padding: 1.25rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .hud-val { 
+            display: block; 
+            font-size: 24px; 
+            font-weight: 800; 
+            font-family: 'Syne', sans-serif; 
+            color: var(--brand-yellow); 
+            text-shadow: 0 0 15px rgba(255, 242, 0, 0.6); /* Neon Yellow Glow */
+        }
+        .hud-label { font-size: 9px; text-transform: uppercase; color: var(--text-dim); font-weight: 700; margin-top: 4px; }
+
+        .action-group { display: flex; flex-direction: column; gap: 12px; }
+        .btn-modern {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            border-radius: 22px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-glass);
+            color: white;
+            background: rgba(255,255,255,0.08);
+            position: relative;
+            z-index: 10;
+        }
+        .btn-modern:hover { transform: scale(1.02) translateY(-4px); background: rgba(255,255,255,0.15); }
+        .btn-primary { background: var(--brand-teal); border: none; box-shadow: 0 10px 30px rgba(29, 158, 117, 0.4); }
+        .btn-youtube:hover { background: #ff0000; border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
+
+        .utility-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn-utility { flex-direction: column; gap: 4px; text-align: center; padding: 14px; font-size: 13px; }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 850px) {
+            .layout-grid { grid-template-columns: 1.1fr 0.9fr; align-items: stretch; }
+        }
+
+        .bento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .bento-item {
+            border-radius: 32px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .bento-item:hover { border-color: var(--brand-teal); transform: translateY(-8px); }
+        .bento-wide { grid-column: span 2; }
+
+        /* Neon Mesh effects for bento boxes */
+        .bento-teal::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle at 0% 0%, rgba(29,158,117,0.2), transparent 70%); pointer-events:none; }
+        .bento-orange::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle at 100% 0%, rgba(245,130,32,0.2), transparent 70%); pointer-events:none; }
+        
+        .bento-icon { font-size: 26px; margin-bottom: 12px; display: block; }
+        .bento-title { font-weight: 800; font-size: 14px; margin-bottom: 4px; color: #fff; position: relative; z-index: 1; }
+        .bento-sub { font-size: 12.5px; color: var(--text-dim); line-height: 1.4; font-weight: 500; position: relative; z-index: 1; }
+
+        /* SIDEBAR DISCOUNT - YELLOW GLOWING NUMBERS */
+        .sidebar-card {
+            border-radius: 36px;
+            padding: clamp(1.5rem, 3vw, 2.25rem);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid var(--brand-orange);
+            background: linear-gradient(135deg, rgba(245, 130, 32, 0.25) 0%, rgba(15, 28, 26, 0.9) 100%);
+            height: 100%;
+            box-shadow: 0 0 35px rgba(245, 130, 32, 0.2);
+        }
+
+        .discount-title { font-family: 'Syne', sans-serif; font-size: clamp(18px, 4vw, 22px); font-weight: 800; color: #fff; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .discount-highlight {
+            color: var(--brand-yellow); 
+            font-size: clamp(32px, 6vw, 48px);
+            display: block;
+            font-weight: 900;
+            text-shadow: 0 0 25px rgba(255, 194, 14, 0.6); /* Intense Yellow Glow */
+            line-height: 1;
+            margin: 0.5rem 0;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+            background: rgba(0,0,0,0.5);
+            border-radius: 100px;
+            height: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .progress-fill {
+            height: 100%;
+            width: 36%;
+            background: linear-gradient(90deg, var(--brand-orange), var(--brand-yellow));
+            box-shadow: 0 0 20px var(--brand-orange);
+            border-radius: 100px;
+            animation: grow 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+
+        .btn-counsel {
+            background: white;
+            color: black;
+            padding: 18px;
+            border-radius: 100px;
+            text-align: center;
+            font-weight: 800;
+            text-decoration: none;
+            margin-top: auto;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .btn-counsel:hover { transform: scale(1.05); background: var(--brand-yellow); }
+
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            width: fit-content;
+            padding: 6px 16px;
+            border-radius: 100px;
+        }
+
+        .pulse-dot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { transform: scale(1); } }
+
+        footer { text-align: center; padding: 4rem 0; font-size: 13px; opacity: 0.5; font-weight: 700; }
+        footer a { color: var(--brand-teal); text-decoration: none; }
+
+        .toast {
+            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #fff; color: #000; padding: 14px 32px; border-radius: 100px;
+            font-weight: 800; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10000;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        @media (max-width: 440px) {
+            h1 { font-size: 32px; }
+            .utility-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+    <div class="emoji-layer" id="emojiLayer"></div>
+
+    <div class="container">
+        <header>
+            <!-- Circular Clickable Floating Logo -->
+            <a href="https://www.gradpathways.com" target="_blank" class="logo-link">
+                <div class="logo-box">
+                    <img src="logo.jpg" alt="Grad Pathways" class="logo-img" onerror="this.src='https://via.placeholder.com/100?text=GP'">
+                </div>
+            </a>
+            <div class="brand-pill">THE FUTURE OF MEDICINE</div>
+        </header>
+
+        <!-- MAIN ACTION CARD -->
+        <div class="main-card glass-card">
+            <div class="live-badge">
+                <div class="pulse-dot"></div>
+                <span>492 STUDENTS ACTIVE NOW</span>
+            </div>
+            
+            <h1>Your Future Starts Here.</h1>
+            <p class="hero-desc">The definitive career roadmap for Russia, China, Kyrgyzstan, and Europe. Join practicing doctors and skip the guesswork.</p>
+
+            <!-- Countdown with glowing yellow numbers -->
+            <div class="hud-timer" id="countdown">
+                <div class="hud-unit"><span class="hud-val" id="days">00</span><span class="hud-label">Days</span></div>
+                <div class="hud-unit"><span class="hud-val" id="hours">00</span><span class="hud-label">Hrs</span></div>
+                <div class="hud-unit"><span class="hud-val" id="mins">00</span><span class="hud-label">Mins</span></div>
+                <div class="hud-unit"><span class="hud-val" id="secs">00</span><span class="hud-label">Secs</span></div>
+            </div>
+
+            <div class="action-group">
+                <a href="https://meet.google.com/mfz-fdib-rkh" target="_blank" class="btn-modern btn-primary">
+                    <span style="font-size: 24px;">📹</span>
+                    <div style="flex:1;">Join Live Meet Room<br><span style="font-size:11px; font-weight:400; opacity:0.8;">May 4 • 4:00 PM IST</span></div>
+                    <span>↗</span>
+                </a>
+
+                <a href="https://www.youtube.com/@GradpathwaysGlobal?sub_confirmation=1" target="_blank" class="btn-modern btn-youtube">
+                    <span style="font-size: 24px;">🔴</span>
+                    <div style="flex:1;">Get the Blueprint<br><span style="font-size:11px; font-weight:400; opacity:0.8;">Join 5,000+ Future Medics</span></div>
+                </a>
+
+                <a href="https://wa.me/919893602581" target="_blank" class="btn-modern">
+                    <span style="font-size: 24px;">💬</span>
+                    <div style="flex:1;">Instant Support<br><span style="font-size:11px; font-weight:400; opacity:0.8;">Message a Counselor</span></div>
+                </a>
+
+                <div class="utility-grid">
+                    <button id="copy-btn" class="btn-modern btn-utility btn-orange">
+                        <strong>🔗 Share Invite</strong>
+                        <span style="font-size:9px; opacity:0.7;">COPY LINK</span>
+                    </button>
+                    <a id="gcal-link" href="#" target="_blank" class="btn-modern btn-utility btn-yellow">
+                        <strong>📅 Add to Calendar</strong>
+                        <span style="font-size:9px; opacity:0.7;">GOOGLE CAL</span>
+                    </a>
+                </div>
+
+                <a id="apple-link" href="#" class="btn-modern" style="justify-content: center; font-size: 13px; border-style: dashed; opacity: 0.8;">
+                    🍎 Add to Apple / Outlook Calendar
+                </a>
+            </div>
+        </div>
+
+        <!-- SPLIT GRID AREA -->
+        <div class="layout-grid">
+            <!-- Left: Bento Highlights with shining glass effect -->
+            <div class="bento-grid">
+                <div class="bento-item glass-card bento-teal">
+                    <span class="bento-icon">🎓</span>
+                    <div>
+                        <div class="bento-title">FMGE Network</div>
+                        <div class="bento-sub">Connect with successful graduates.</div>
+                    </div>
+                </div>
+                <div class="bento-item glass-card bento-orange">
+                    <span class="bento-icon">🩺</span>
+                    <div>
+                        <div class="bento-title">Pro Roadmap</div>
+                        <div class="bento-sub">EU & Asia Pathways.</div>
+                    </div>
+                </div>
+                <div class="bento-item glass-card bento-wide bento-teal">
+                    <span class="bento-icon">🛡️</span>
+                    <div>
+                        <div class="bento-title">Zero Risk Guidance</div>
+                        <div class="bento-sub">Direct interaction with practicing International Doctors who have been in your shoes.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Sidebar with glowing yellow numbers -->
+            <div class="sidebar-card glass-card">
+                <div class="discount-title">Avail Your</div>
+                <span class="discount-highlight">15% DISCOUNT</span>
+                <p style="font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">Claim your attendee spot now for exclusive service fee benefits.</p>
+                
+                <div class="progress-container">
+                    <div class="progress-fill"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; text-transform: uppercase;">
+                    <span style="color: var(--brand-yellow); text-shadow: 0 0 10px rgba(255,242,0,0.5);">36/100 Claimed</span>
+                    <span style="color: var(--brand-yellow);">Act Fast!</span>
+                </div>
+
+                <a href="https://wa.me/919893602581?text=Hi!%20I%20want%20to%20avail%20the%2015%25%20discount%20and%20get%20instant%20counselling." target="_blank" class="btn-counsel">
+                    Get Instant Counselling ⚡
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            Built for future healers at <a href="https://www.gradpathways.com" target="_blank">gradpathways.com</a>
+        </footer>
+    </div>
+
+    <div class="toast" id="toast">Link Copied! 🚀</div>
+
+    <script>
+        const TARGET_DATE = new Date('May 4, 2026 16:00:00').getTime();
+        const MEETING_URL = 'https://meet.google.com/mfz-fdib-rkh';
+
+        // Floating Emojis Drift Effect
+        const emojis = ['🏥', '🩺', '💊', '🫀', '🚑', '🩹', '💉', '🩸', '🧑‍⚕️'];
+        const layer = document.getElementById('emojiLayer');
+        for(let i = 0; i < 20; i++) {
+            const span = document.createElement('span');
+            span.className = 'floating-emoji';
+            span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.animationDelay = (Math.random() * 20) + 's';
+            span.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            layer.appendChild(span);
+        }
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = TARGET_DATE - now;
+            if (diff <= 0) {
+                const countdownBox = document.getElementById('countdown');
+                if(countdownBox) countdownBox.innerHTML = "<div style='grid-column: span 4; font-weight: 800; color: var(--brand-teal); text-align: center; font-size: 20px;'>WEBINAR IS LIVE!</div>";
+                return;
+            }
+            document.getElementById('days').innerText = String(Math.floor(diff / 86400000)).padStart(2, '0');
+            document.getElementById('hours').innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+            document.getElementById('mins').innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            document.getElementById('secs').innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000); updateTimer();
+
+        document.getElementById('copy-btn').addEventListener('click', () => {
+            const el = document.createElement('textarea'); el.value = MEETING_URL; document.body.appendChild(el);
+            el.select(); document.execCommand('copy'); document.body.removeChild(el);
+            const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000);
+        });
+
+        const calTitle = encodeURIComponent('Grad Pathways Medical Webinar');
+        const calDates = '20260504T103000Z/20260504T123000Z'; 
+        document.getElementById('gcal-link').href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&dates=${calDates}&location=${encodeURIComponent(MEETING_URL)}`;
+
+        const icsContent = ['BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT','URL:' + MEETING_URL,'DTSTART:20260504T103000Z','DTEND:20260504T123000Z','SUMMARY:Grad Pathways Webinar','DESCRIPTION:Join the meet: ' + MEETING_URL,'LOCATION:' + MEETING_URL,'END:VEVENT','END:VCALENDAR'].join('\r\n');
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const appleBtn = document.getElementById('apple-link');
+        appleBtn.href = window.URL.createObjectURL(blob);
+        appleBtn.setAttribute('download', 'GradPathways_Webinar.ics');
+    </script>
+</body>
+</html>
